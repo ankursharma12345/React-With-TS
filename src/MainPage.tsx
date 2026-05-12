@@ -15,6 +15,7 @@ const MainPage = () => {
   const [inputArr, setInputArr] = useState<string[]>([]); // Ek state banao jo string array store karegi, aur initially empty array hogi
   const [dragIndex, setDragIndex] = useState(0);
   const [isEdit, setIsEdit] = useState(false);
+  const [btnIndex, setBtnIndex] = useState(0);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setFormData(value);
@@ -22,12 +23,19 @@ const MainPage = () => {
   // const activeRef = useRef<ActiveTaskHandle>(null);
   // useRef ke saath aise likhne se TS ko btata h ki ref.current ke saath ActiveTaskHandle type ka ek object aayega , jisme setActiveTask name ki property hogi
   const handleAddTask = () => {
+    if (formData?.length === 0) return;
     // activeRef.current?.setActiveTask(formData);
+    if (isEdit) {
+      setInputArr((prev) => prev.map((itm, index) => index === btnIndex ? itm = formData : itm));
+      setBtnIndex(0);
+      setIsEdit(false);
+    } else {
+      setInputArr((prev) => ([
+        ...prev,
+        formData
+      ]));
+    }
     setFormData("");
-    setInputArr((prev) => ([
-      ...prev,
-      formData
-    ]));
   }
 
   useEffect(() => {
@@ -48,12 +56,12 @@ const MainPage = () => {
     setInputArr(lists);
   };
 
-  const updateData = ({ taskName, btnIndex, editClick }: btnTypes) => {
+  const updateData = ({ taskName, btnIndex }: btnTypes) => {
     // setFormData(data);
     // setInputArr(indx);
     setFormData(taskName);
-    console.log(btnIndex);
-    console.log(editClick);
+    setIsEdit(true);
+    setBtnIndex(btnIndex);
   }
 
   return (
