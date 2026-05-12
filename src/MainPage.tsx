@@ -1,11 +1,20 @@
+/* eslint-disable no-debugger */
 import { useEffect, useState } from "react";
 import ActiveTask from "./ActiveTask";
 import CompletedTask from "./CompletedTask";
 
+interface btnTypes {
+  taskName: string;
+  btnIndex: number;
+  editClick: boolean
+
+}
 
 const MainPage = () => {
   const [formData, setFormData] = useState("");
   const [inputArr, setInputArr] = useState<string[]>([]); // Ek state banao jo string array store karegi, aur initially empty array hogi
+  const [dragIndex, setDragIndex] = useState(0);
+  const [isEdit, setIsEdit] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setFormData(value);
@@ -25,6 +34,27 @@ const MainPage = () => {
     const inputText = document.getElementById("task");
     inputText?.focus();
   }, [formData]);
+
+  const handleDragStart = (index: number): void => {
+    setDragIndex(index);
+  };
+
+  const handleDropIndex = (index: number): void => {
+    if (index === null) return;
+    const lists = [...inputArr];
+    const listItem = lists[dragIndex];
+    lists.splice(dragIndex, 1);
+    lists.splice(index, 0, listItem);
+    setInputArr(lists);
+  };
+
+  const updateData = ({ taskName, btnIndex, editClick }: btnTypes) => {
+    // setFormData(data);
+    // setInputArr(indx);
+    setFormData(taskName);
+    console.log(btnIndex);
+    console.log(editClick);
+  }
 
   return (
     <>
@@ -68,7 +98,7 @@ const MainPage = () => {
           </button>
         </div>
         <div style={{ display: "flex", justifyContent: "flex-start", marginTop: "3rem", gap: "1rem" }}>
-          <ActiveTask inputArr={inputArr} />
+          <ActiveTask inputArr={inputArr} handleDragStart={handleDragStart} handleDropIndex={handleDropIndex} updateData={updateData} />
           <CompletedTask />
         </div>
       </div>
