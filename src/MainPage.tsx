@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { useEffect, useState } from "react";
 import ActiveTask from "./ActiveTask";
 import CompletedTask from "./CompletedTask";
@@ -55,6 +56,7 @@ const MainPage = () => {
   const updateTasksList = () => {
     if (dragIndex === null) return;
     const dragTask = activeTasks[dragIndex];
+    if (!dragTask) return;
     setActiveTask((prev) => prev.filter((_, inptIndex) => inptIndex !== dragIndex));
     setCompleted((prev) => ([...prev, dragTask]));
     setDragIndex(null);
