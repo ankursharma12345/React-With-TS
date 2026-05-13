@@ -1,39 +1,29 @@
-/* eslint-disable no-debugger */
 import React from "react";
 import "./Styles/ActiveTask.css";
 import { ButtonType } from "./Enums/ButtonEnums";
 import { buttons } from "./utils";
+import type { BtnTypes } from "./Interfaces/BtnInterface";
 
-interface BtnTypes {
-    taskName: string;
-    btnIndex: number;
-    editClick: boolean;
-}
 interface PropType {
-    inputArr: string[];
+    activeTasks: string[];
     handleDragStart: (index: number) => void;
-    handleDropIndex: (index: number) => void;
     updateData: (data: BtnTypes) => void;
+    deleteData: (index: number) => void;
 }
 
-const ActiveTask = ({ inputArr, handleDragStart, handleDropIndex, updateData }: PropType) => {
-    const taskLists = inputArr.length === 0 ? [""] : inputArr;
+const ActiveTask = ({ activeTasks, handleDragStart, updateData, deleteData }: PropType) => {
+    const taskLists = activeTasks.length === 0 ? [""] : activeTasks;
 
     const handleBtnClick = (btnType: string, btnIndex: number) => {
         const taskName = taskLists.filter((_, index) => index === btnIndex)?.[0];
         if (btnType === ButtonType.EDIT) {
-            updateData({ taskName, btnIndex, editClick: true });
+            updateData({ taskName, btnIndex });
+            return;
         }
-        if (btnType === ButtonType.DELETE) console.log(`On Delete , ${btnIndex}`);
+        if (btnType === ButtonType.DELETE) deleteData(btnIndex);
     };
 
-    const handleDragStartIndex = (index: number) => {
-        handleDragStart(index);
-    };
-
-    const handleDrop = (index: number) => {
-        handleDropIndex(index);
-    }
+    const handleDragStartIndex = (index: number) => handleDragStart(index);
 
     return (
         <div
@@ -45,17 +35,15 @@ const ActiveTask = ({ inputArr, handleDragStart, handleDropIndex, updateData }: 
             }}
         >
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "-1rem" }}>
-                <h2>Active Tasks</h2>
+                <h2 style={{ textTransform: "uppercase" }}>Active Tasks</h2>
             </div>
             <div style={{ margin: "1rem 0 1rem 0" }}>
-                {taskLists.map((item, taskIndex) => {
+                {taskLists?.map((item, taskIndex) => {
                     return (
                         <div
                             key={taskIndex}
                             draggable={true}
-                            onDragStart={() => handleDragStartIndex(taskIndex)} // Drag item ko store krta h 
-                            onDragOver={(e) => e.preventDefault()} // Ye drop allow krne ke liye required hai
-                            onDrop={() => handleDrop(taskIndex)} // Dragged item ko new position par insert karte hain.
+                            onDragStart={() => handleDragStartIndex(taskIndex)} // Dragged item ko store krta h
                             style={{
                                 width: "90%",
                                 height: "60px",
@@ -83,7 +71,6 @@ const ActiveTask = ({ inputArr, handleDragStart, handleDropIndex, updateData }: 
                     )
                 })}
             </div>
-
         </div >
     );
 };

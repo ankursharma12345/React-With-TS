@@ -1,0 +1,11 @@
+.gradient-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 0px;
+    margin: 25px 0;
+    /* text-transform: uppercase; */
+    /* background: linear-gradient(90deg, #961515, #156b8d, #a31c1c); */
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px rgba(0, 0, 0, 1);
+}
