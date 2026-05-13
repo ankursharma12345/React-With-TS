@@ -9,3 +9,43 @@
     -webkit-text-fill-color: transparent;
     text-shadow: 0 4px rgba(0, 0, 0, 1);
 }
+        .heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .input-element {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+    
+        #task {
+            width: 100%;
+            border-radius: 8px;
+            padding: 10px 70px 10px 10px;
+            font-size: 20px;
+            box-sizing: border-box;
+        }
+    
+        #go-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: #1976d2;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    
+        .child-elements {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 3rem;
+            gap: 1rem;
+        }

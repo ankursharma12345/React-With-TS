@@ -16,11 +16,8 @@ const MainPage = () => {
     const { value } = e.target;
     setFormData(value);
   }
-  // const activeRef = useRef<ActiveTaskHandle>(null);
-  // useRef ke saath aise likhne se TS ko btata h ki ref.current ke saath ActiveTaskHandle type ka ek object aayega , jisme setActiveTask name ki property hogi
   const handleAddTask = () => {
     if (formData?.length === 0) return;
-    // activeRef.current?.setActiveTask(formData);
     if (isEdit) {
       setActiveTask((prev) => prev.map((itm, index) => index === btnIndex ? formData : itm));
       setBtnIndex(null);
@@ -69,46 +66,26 @@ const MainPage = () => {
   }
 
   return (
-    <div className="main-div">
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <h2 className="gradient-title" style={{ color: "white" }}>TASKIFY APP</h2>
+    <div>
+      <div className="heading">
+        <h2 className="gradient-title">TASKIFY APP</h2>
       </div>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative" }}>
+      <div className="input-element">
         <input
-          placeholder="Enter a Task"
           id="task"
+          placeholder="Enter a Task"
           autoFocus={true}
-          onChange={(e) => {
-            handleChange(e);
-          }}
+          onChange={(e) => handleChange(e)}
           value={formData}
-          style={{
-            width: "100%",
-            borderRadius: "8px",
-            padding: "10px 70px 10px 10px",
-            fontSize: "20px",
-            boxSizing: "border-box",
-          }}
         />
         <button
-          style={{
-            position: "absolute",
-            right: "8px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            border: "none",
-            background: "#1976d2",
-            color: "white",
-            padding: "8px 14px",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
+          id="go-btn"
           onClick={handleAddTask}
         >
           GO
         </button>
       </div>
-      <div style={{ display: "flex", justifyContent: "flex-start", marginTop: "3rem", gap: "1rem" }}>
+      <div className="child-elements">
         <ActiveTask activeTasks={activeTasks} handleDragStart={handleDragStart} updateData={updateData} deleteData={deleteData} />
         <CompletedTask updateTasksList={updateTasksList} completedTasks={completed} handleCompletedData={handleCompletedData} />
       </div>

@@ -1,4 +1,26 @@
-.active-btn {
+#act-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 60px;
+    background-color: seagreen;
+    border-radius: 10px;
+    margin: 1rem 0 0 1.4rem;
+}
+
+#act-name {
+    color: white;
+    margin-left: 1rem;
+}
+
+#act-btns {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#active-btn {
     border: none;
     outline: none;
     background: transparent;

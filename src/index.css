@@ -1,4 +1,26 @@
 body {
   /* background-color: rgb(77, 77, 228); */
-    background: linear-gradient(to right, rgb(132, 132, 165), rgb(255, 120, 120));
+  background: linear-gradient(to right, rgb(132, 132, 165), rgb(255, 120, 120));
+}
+.icon {
+  height: 20px;
+  width: 20px;
+}
+
+.main-div {
+  background-color: yellowgreen;
+  height: auto;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.header-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -1rem;
+}
+
+.heading {
+  text-transform: uppercase;
 }

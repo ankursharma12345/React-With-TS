@@ -16,15 +16,10 @@ const CompletedTask = ({ updateTasksList, completedTasks, handleCompletedData }:
         <div
             onDrop={handleDrop} // Dragged item ko new position par insert karte hain.
             onDragOver={(e) => e.preventDefault()}
-            style={{
-                backgroundColor: "yellowgreen",
-                minHeight: "auto",
-                width: "50%",
-                borderRadius: "10px",
-            }}
+            className="main-div"
         >
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "-1rem" }}>
-                <h2 style={{ textTransform: "uppercase" }}>Completed Tasks</h2>
+            <div className="header-div">
+                <h2 className="heading">Completed Tasks</h2>
             </div>
             <div style={{ margin: "1rem 0 1rem 0" }}>
                 {completedTasks.map((itm, indx) => {
@@ -36,7 +31,7 @@ const CompletedTask = ({ updateTasksList, completedTasks, handleCompletedData }:
                                 height: "60px",
                                 backgroundColor: "seagreen",
                                 borderRadius: "10px",
-                                margin: "1rem 0 0 1rem",
+                                margin: "1rem 0 0 1.4rem",
                                 display: "flex",
                                 justifyContent: "space-between",
                                 alignItems: "center",
